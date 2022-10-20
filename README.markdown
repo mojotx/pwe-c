@@ -41,9 +41,10 @@ The code is written in C, and uses the [GNU MPFR library](https://www.mpfr.org/)
 
 The code compiles cleanly on macOS and Linux, and should be straightforward to build on any UNIX-like operating system that's supported by MPFR.
 
-On a Mac, you can just type "make" if you have the command-line developer tools installed. If you do NOT have the command-line development tools installed, you can install them with the `xcode-select --install` command.
 
 ### Mac compilation
+
+On a Mac, you can just type "make" if you have the command-line developer tools installed. If you do NOT have the command-line development tools installed, you can install them with the `xcode-select --install` command. You will also need to install the GNU MPFR library, and IMHO the easiest way to do that is with the [Homebrew package manager](https://brew.sh), and `brew install mpfr`.
 
 ```text
 $ make
@@ -52,6 +53,8 @@ clang -O -Wall -Wextra -fstack-protector-strong -pipe -MMD -arch x86_64 -mmacosx
 ```
 
 ### Linux compilation
+
+On Linux, you will need a C compiler, GNU Make, and the GNU MPFR library installed. You can install MPFR by using the appropriate package manager, such as `apt install libmpfr-dev` on Debian or Ubuntu, or `dnf install mpfr` on Rocky Linux, Red Hat, CentOS, Fedora, etc.
 
 ```text
 $ make
