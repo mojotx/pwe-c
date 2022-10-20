@@ -34,3 +34,27 @@ $$log_2(N^L)  \Rightarrow  log_2(62^{20}) \Rightarrow log_2(704,423,425,546,997,
 Assume all uppercase and lowercase Roman letters, as well as digits 0-9, and the symbols `!`, `#`, `%`, `+`, `:`, `=`, `?`, `@`, `,`, and `.`, then `N` = 72, and `L` = 32...
 
 $$log_2(N^L)  \Rightarrow  log_2(72^{32}) \Rightarrow log_2(2.7204445974 \cdot 10^{59}) \Rightarrow 197.437600$$
+
+## Password Entropy Calculator usage
+
+The code is written in C, and uses the [GNU MPFR library](https://www.mpfr.org/) for working with very large numbers with accuracy and precision.
+
+The code compiles cleanly on macOS and Linux, and should be straightforward to build on any UNIX-like operating system that's supported by MPFR.
+
+On a Mac, you can just type "make" if you have the command-line developer tools installed. If you do NOT have the command-line development tools installed, you can install them with the `xcode-select --install` command.
+
+### Mac compilation
+
+```text
+$ make
+clang -c -O -Wall -Wextra -fstack-protector-strong -pipe -MMD -arch x86_64 -mmacosx-version-min=12.0 pwe.c -o pwe.o
+clang -O -Wall -Wextra -fstack-protector-strong -pipe -MMD -arch x86_64 -mmacosx-version-min=12.0 -o pwe pwe.o -lmpfr
+```
+
+### Linux compilation
+
+```text
+$ make
+cc -c -O -Wall -Wextra -fstack-protector-strong -pipe -MMD pwe.c -o pwe.o
+cc -O -Wall -Wextra -fstack-protector-strong -pipe -MMD -o pwe pwe.o -lmpfr
+```
