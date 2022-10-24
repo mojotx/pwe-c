@@ -14,8 +14,7 @@ usage(const char *pName)
     puts("n:\tnumber of unique characters");
     puts("l:\tlength of password");
 
-    puts(BLKC);
-    printf("MPFR library: %-12s\nMPFR header:  %s (based on %d.%d.%d)\n",
+    printf(BLKC "MPFR library: %-12s\nMPFR header:  %s (based on %d.%d.%d)\n",
            mpfr_get_version(), MPFR_VERSION_STRING, MPFR_VERSION_MAJOR,
            MPFR_VERSION_MINOR, MPFR_VERSION_PATCHLEVEL);
     printf("MPFR_PREC_MIN=%d and MPFR_PREC_MAX=%ld\n", MPFR_PREC_MIN, MPFR_PREC_MAX);
