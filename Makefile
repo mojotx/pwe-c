@@ -2,7 +2,7 @@ OS=$(shell uname -s)
 ARCH=$(shell uname -m)
 CFLAGS=-O -Wall -Wextra -fstack-protector-strong -pipe -MMD
 ifeq ($(OS), Darwin)
-	CFLAGS+=-arch $(ARCH) -mmacosx-version-min=12.0
+	CFLAGS+=-arch $(ARCH) -mmacosx-version-min=13.0
 endif
 RM=rm -fvr
 SRCS=pwe.c
