@@ -12,7 +12,7 @@ It's generally desirable to have an entropy value greater than 100. At that poin
 
 ### WEAK EXAMPLE
 
-`kwrzuubl`
+Weak password: `kwrzuubl`
 
 Assuming all lowercase letters, `N` would be 26, and for an 8-character password, `L` would be 8.
 
@@ -20,7 +20,7 @@ $$log_2(N^L)  \Rightarrow  log_2(26^8) \Rightarrow log_2(208,827,064,576) \Right
 
 ### STRONG EXAMPLE
 
-`8hYOXgERzBCCC8MkqBip`
+Strong password: `8hYOXgERzBCCC8MkqBip`
 
 Assuming all uppercase and lowercase letters, as well as digits 0-9, `N` would be 62, and for a 20-character password, `L` would be 20...
 
@@ -29,7 +29,7 @@ $$log_2(N^L)  \Rightarrow  log_2(62^{20}) \Rightarrow log_2(704,423,425,546,997,
 
 ### INSANELY STRONG
 
-`6u?Gs6q9z,3ehqX7g1Og4P8mJ@pd.dmW`
+VERY strong password: `6u?Gs6q9z,3ehqX7g1Og4P8mJ@pd.dmW`
 
 Assume all uppercase and lowercase Roman letters, as well as digits 0-9, and the symbols `!`, `#`, `%`, `+`, `:`, `=`, `?`, `@`, `,`, and `.`, then `N` = 72, and `L` = 32...
 
@@ -37,7 +37,7 @@ $$log_2(N^L)  \Rightarrow  log_2(72^{32}) \Rightarrow log_2(2.7204445974 \cdot 1
 
 ## Password Entropy Calculator usage
 
-The code is written in C, and uses the [GNU MPFR library](https://www.mpfr.org/) for working with very large numbers with accuracy and precision.
+The code is written in C, and uses the [GNU MPFR library](https://www.mpfr.org/) for working with very large numbers with accuracy and precision, as well as the [GNU Multiple Precision Arithmetic Library](https://gmplib.org/).
 
 The code compiles cleanly on macOS and Linux, and should be straightforward to build on any UNIX-like operating system that's supported by MPFR.
 
@@ -48,13 +48,17 @@ On a Mac, you can just type "make" if you have the command-line developer tools 
 
 ```text
 $ make
-clang -c -O -Wall -Wextra -fstack-protector-strong -pipe -MMD -arch x86_64 -mmacosx-version-min=12.0 pwe.c -o pwe.o
-clang -O -Wall -Wextra -fstack-protector-strong -pipe -MMD -arch x86_64 -mmacosx-version-min=12.0 -o pwe pwe.o -lmpfr
+clang -c -O -Wall -Wextra -fstack-protector-strong -pipe -MMD -arch x86_64 -mmacosx-version-min=13.0 pwe.c -o pwe.o
+clang -O -Wall -Wextra -fstack-protector-strong -pipe -MMD -arch x86_64 -mmacosx-version-min=13.0 -o pwe pwe.o -lmpfr
 ```
 
 ### Linux compilation
 
-On Linux, you will need a C compiler, GNU Make, and the GNU MPFR library installed. You can install MPFR by using the appropriate package manager, such as `apt install libmpfr-dev` on Debian or Ubuntu, or `dnf install mpfr` on Rocky Linux, Red Hat, CentOS, Fedora, etc.
+On Linux, you will need a C compiler, GNU Make, and the GNU MPFR library installed, along with with GMP header files.
+
+- **Debian, Ubuntu:** Run `apt install libmpfr-dev`
+- **Red Hat, Rocky Linux, CentOS, Fedora:**  Run `dnf install mpfr-devel`
+- **Alpine Linux:** Run `apk add mpfr-dev gmp-dev`.
 
 ```text
 $ make
