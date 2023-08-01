@@ -41,7 +41,6 @@ The code is written in C, and uses the [GNU MPFR library](https://www.mpfr.org/)
 
 The code compiles cleanly on macOS and Linux, and should be straightforward to build on any UNIX-like operating system that's supported by MPFR.
 
-
 ### Mac compilation
 
 On a Mac, you can just type "make" if you have the command-line developer tools installed. If you do NOT have the command-line development tools installed, you can install them with the `xcode-select --install` command. You will also need to install the GNU MPFR library, and IMHO the easiest way to do that is with the [Homebrew package manager](https://brew.sh), and `brew install mpfr`.
