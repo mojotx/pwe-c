@@ -8,6 +8,25 @@ Security is all about trade-offs between the value of whatever you are protectin
 
 It's generally desirable to have an entropy value greater than 100. At that point, it will either take an incredibly powerful supercomputer to break the password, or else it will take an inordinate amount of time.
 
+## Why 100 bits?
+
+An offline brute-force attack has to search, on average, half of a $2^E$ keyspace, where `E` is the entropy in bits. How long that takes depends entirely on how fast an attacker can try guesses, which in turn depends on how the password is stored:
+
+| Hash / storage scheme                                                    | Realistic guess rate*            | Time to exhaust $2^{100}$ |
+| ------------------------------------------------------------------------ | -------------------------------- | ------------------------- |
+| Fast, unsalted hash (MD5, SHA-1, NTLM) on a large GPU/ASIC cracking farm | ~$10^{12}$–$10^{13}$ guesses/sec | Billions of years         |
+| Properly salted, slow KDF (bcrypt, scrypt, Argon2)                       | ~$10^3$–$10^5$ guesses/sec       | Effectively infinite      |
+
+\* These are pessimistic, attacker-favorable estimates, not real single-GPU numbers today; they intentionally leave headroom for future hardware (Moore's law/ASICs) and for quantum computers, since Grover's algorithm gives a quadratic speedup on unstructured search and effectively halves the *bit strength* of a brute-force search (i.e., a 100-bit password behaves more like ~50 bits against a large-scale quantum attacker).
+
+Even under the pessimistic, fast-hash scenario, 100 bits leaves many orders of magnitude of safety margin, so it's still a reasonable, conservative target today. It also roughly tracks the ~128-bit security level that NIST recommends for cryptographic keys through 2030 and beyond — 100 bits is a bit below that "gold standard," but far beyond what's needed to resist any realistic brute-force attack, and it costs the user very little extra effort to type/store a slightly longer or richer password to get there.
+
+## Important caveats
+
+- **This formula only measures theoretical, best-case entropy.** It assumes every character is chosen independently and uniformly at random from the `N`-character alphabet. A human-chosen password of the same length and alphabet (e.g., `Password123!`) has dramatically *less* real-world entropy than this formula reports, because attackers use dictionaries, common substitutions (`a`→`@`), and pattern-aware rules rather than pure brute force. Use a password manager or a random generator if you want the calculated entropy to actually apply.
+- **Raw entropy isn't the whole story.** [NIST SP 800-63B](https://pages.nist.gov/800-63-3/sp800-63b.html) and OWASP now emphasize length (12–15+ characters), screening against known-breached password lists, rate-limiting/lockout on login attempts, and slow, salted password hashing (bcrypt/scrypt/Argon2) on the server side — these controls often matter more in practice than hitting a specific entropy number, since they're what stand between an attacker and an offline brute-force attack in the first place.
+- Given those caveats, "greater than 100 bits" remains reasonable advice for a *randomly generated* password/passphrase, but it's not a magic threshold — it's simply an extremely comfortable margin above what's brute-forceable today, chosen to absorb decades of hardware improvement.
+
 ## Examples
 
 ### WEAK EXAMPLE
